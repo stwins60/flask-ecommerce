@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: flask-ecom
+    environment: ENV_NAME
+  name: flask-ecom
+  namespace: NAMESPACE
+spec:
+  replicas: REPLICAS
+  selector:
+    matchLabels:
+      app: flask-ecom
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: flask-ecom
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - image: IMAGE_NAME
+        name: flask-ecom
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 500m
+            memory: 256Mi
+
